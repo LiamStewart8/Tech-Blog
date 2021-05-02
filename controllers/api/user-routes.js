@@ -1,38 +1,50 @@
 const router = require('express').Router();
-const { Blog, User } = require('../models');
+const { User } = require('../../models');
 
+// Create a new user
+router.post('/signup', async (req, res) => {
+    try{
+        const userData = await User.create({
+            name: req.body.name,
+            password: req.body.password
+        });
+        req.session.save(() => {
+            req.sessions.loggedIn = true;
+            res.status(200).json(userData);
+        });
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
+// Login
 router.post('/login', async (req, res) => {
     try {
         const userData = await User.findOne({ where: { name: req.body.name } });
-
         if (!userData) {
             res
                 .status(400)
                 .json({ message: 'Incorrect username or password, please try again' });
             return;
         }
-
         const validPassword = await userData.checkPassword(req.body.password);
-
         if (!validPassword) {
             res
                 .status(400)
                 .json({ message: 'Incorrect username or password, please try again' });
             return;
         }
-
         req.session.save(() => {
             req.session.user_id = userData.id;
             req.session.logged_in = true;
-
             res.json({ user: userData, message: 'You are now logged in!' });
         });
-
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
+// Logout
 router.post('/logout', (req, res) => {
     if (req.session.logged_in) {
         req.session.destroy(() => {
@@ -43,29 +55,5 @@ router.post('/logout', (req, res) => {
     }
 });
 
-router.get('/:blogId', (req, res) => {
-
-});
-
-router.get('/dashboard/new', (req, res) => {
-
-});
-
-
-router.post('/dashboard/new', (req, res) => {
-
-});
-
-router.get('/dashboard/edit/:blogId', (req, res) => {
-
-});
-
-router.put('/dashboard/edit/:blogId', (req, res) => {
-
-});
-
-router.delete('/dashboard/edit/:blogId', (req, res) => {
-
-});
 
 modules.export = router;
