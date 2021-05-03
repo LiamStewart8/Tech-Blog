@@ -17,10 +17,6 @@ Comment.init(
         },
         user_id: {
             type: DataTypes.INTEGER,
-            references: {
-                model: 'User',
-                key: 'id',
-            },
         },
         blog_id: {
             type: DataTypes.INTEGER,
@@ -29,6 +25,13 @@ Comment.init(
                 key: 'id',
             },
         },
+    },
+    {
+        sequelize,
+        timestamps: true,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'Comment',
     }
 );
 

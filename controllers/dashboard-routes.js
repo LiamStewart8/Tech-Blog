@@ -1,13 +1,14 @@
 const router = require('express').Router();
 const { Blog, User } = require('../models');
+const withAuth = require('../utils/withAuth');
 
-
-router.get('/dashboard', async (req, res) => {
+router.get('/dashboard', withAuth, async (req, res) => {
     try {
-        const blogData = await Blog.findAll({
+        const blogData = await Blog.findAll({ where: {user_id:req.session.user_id}},{
             include: [
                 {
-                    model: User
+                    model: User,
+                    attribute: ['username']
                 },
             ],
         });
@@ -20,13 +21,11 @@ router.get('/dashboard', async (req, res) => {
     }
 });
 
-router.get('/dashboard/new', async (req, res) => {
 
-});
-
-router.post('/dashboard/new', (req, res) => {
+router.post('/dashboard', withAuth, async (req, res) => {
     try {
         const newBlog = await Blog.create({
+            user_id: req.session.user_id,
             title: req.body.title,
             body: req.body.body
         });
@@ -36,15 +35,21 @@ router.post('/dashboard/new', (req, res) => {
     }
 });
 
-router.get('/dashboard/edit/:id', (req, res) => {
-
+router.get('/dashboard/edit/:id', withAuth, async (req, res) => {
+    try {
+        const blogData = await Blog.findByPk(req.params.id, {where: {user_id:req.session.user_id}})
+        const blog = blogData.get({ plain: true });
+        res.render('oneblog');
+    } catch (err) {
+        res.status(500).json(err);
+    }
 });
 
-router.put('/dashboard/edit/:id', (req, res) => {
+// router.put('/dashboard', (req, res) => {
     
-});
+// });
 
-router.delete('/dashboard/edit/:id', async (req, res) => {
+router.delete('/dashboard/edit/:id', withAuth, async (req, res) => {
     try {
         const blogData = await Blog.destroy({
             where: {
