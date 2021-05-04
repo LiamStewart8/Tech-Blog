@@ -15,10 +15,10 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="">Tech Blog</a>
+                <a class="navbar-brand" href="/">Tech Blog</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="">Home</a></li>
+                <li class="active"><a href="/">Home</a></li>
                 {{#if logged_in}}
                 <li><a href="/dashboard">Dashboard</a></li>
             </ul>
@@ -68,8 +68,10 @@
 
     {{#if logged_in}}
     <script src="logout.js"></script>
-    {{/if}}
+    <script src="newBlog.js"></script>
+    {{else}}
     <script src="login.js"></script>
+    {{/if}}
 </body>
 
 </html>

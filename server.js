@@ -23,7 +23,7 @@ const sess = {
     }),
 };
 
-setTimeout(function(){ document.location.replace('/api/user/logout')} ,600000)
+
 
 app.use(session(sess));
 
