@@ -56,18 +56,18 @@ router.get('/blog/:id', withAuth, async(req, res) => {
     }
 }); 
 
-router.post('/blog/:id', async (req, res) => {
+router.post('/blog', async (req, res) => {
     try {
-        const commentData = await Comment.create({
-            body: req.body.body,
-        });
+        const newComment = req.params.body;
+        newComment.user_id = req.session.user_id;
+        const commentData = await Comment.create(newComment);
         res.status(200).json(commentData);
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
-router.delete('/blog/:id', async (req, res) => {
+router.delete('/blog', async (req, res) => {
     try {
         const commentData = await Comment.destroy({
             where: {
@@ -87,7 +87,7 @@ router.delete('/blog/:id', async (req, res) => {
 router.post('/:id/comment', async (req, res) => {
     try {
         const commentData = await Comment.create({
-            body: req.body.body,
+            body: req.params.body,
         });
         res.status(200).json(commentData);
     } catch (err) {

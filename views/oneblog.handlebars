@@ -1,15 +1,29 @@
-<div class="card" style="width: 36rem;">
-    <div class="card-body">
-        <h5><a href="/blog/{{blog.id}}" class="card-title">{{blog.title}}</a></h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{blog.User.name}}</h6>
-        <p class="card-text">{{blog.body}}</p>
+
+<div class="panel panel-primary" style="width: 80rem;">
+    <div class="panel-body">
+        <h5><a href="/blog/{{blog.id}}" class="panel-title">{{blog.title}}</a></h5>
+        <h6 class="panel-subtitle mb-2 text-muted">Written by: {{blog.User.name}}</h6>
+        <p class="panel-text">{{blog.body}}</p>
     </div>
 </div>
 {{#each comment}}
-<div class="card" style="width: 36rem;">
-    <div class="card-body">
+<div class="panel" style="width: 36rem;" id="comment-form">
+    <div class="panel-body">
         <h5>{{User.username}} on {{time}}</h5>
-        <p class="card-text">{{body}}</p>
+        <p class="panel-text">{{body}}</p>
     </div>
 </div>
 {{/each}}
+
+<div class="container">
+    <form>
+    <div class="form-group" style="width: 80rem;" >
+        <label for="exampleFormControlTextarea1">Comment</label>
+        <textarea class="form-control" rows="3" id="comment-form"></textarea>
+        <input type="hidden" id="postId" value="{{blog.id}}">
+    </div>
+    <button type="button" class="btn btn-dark" id="submit-comment">Send</button>
+    </form>
+</div>
+
+<script src="comment.js"></script>

@@ -1,15 +1,19 @@
-<div class="card" style="width: 36rem;">
-    <div class="card-body">
-        <h5><a href="/blog/{{blog.id}}" class="card-title">{{blog.title}}</a></h5>
-        <h6 class="card-subtitle mb-2 text-muted">{{blog.User.name}}</h6>
-        <p class="card-text">{{blog.body}}</p>
+{{#each blogs as |blog|}}
+<div class="panel panel-primary" style="width: 80rem;">
+    <div class="panel-body">
+        <h5><a href="/blog/{{blog.id}}" class="panel-title">{{blog.title}}</a></h5>
+        <h6 class="panel-subtitle mb-2 text-muted">Written by: {{blog.User.name}}</h6>
+        <p class="panel-text">{{blog.body}}</p>
     </div>
 </div>
+{{/each}}
+
+
 {{#each comment}}
-<div class="card" style="width: 36rem;">
-    <div class="card-body">
+<div class="panel panel-primary" style="width: 36rem;">
+    <div class="panel-body">
         <h5>{{User.username}} on {{time}}</h5>
-        <p class="card-text">{{body}}</p>
+        <p class="panel-text">{{body}}</p>
     </div>
 </div>
 {{/each}}
@@ -28,3 +32,4 @@
     </form>
 </div>
 
+<script src="newBlog.js"></script>
