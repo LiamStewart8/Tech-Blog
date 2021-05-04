@@ -1,6 +1,7 @@
 const withAuth = (req, res, next) => {
     if (!req.session.loggedIn) {
-        res.redirect('/login');
+        res.redirect('/');
+        alert('Please log in or sign up first.');
     } else {
         next();
     }

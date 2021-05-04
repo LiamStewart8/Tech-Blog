@@ -7,7 +7,7 @@ const newPostForm = async (event) => {
     if (title && body) {
         const response = await fetch(`/dashboard`, {
             method: 'POST',
-            body: JSON.stringify({ title, body}),
+            body: JSON.stringify({ title, body }),
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -23,3 +23,7 @@ const newPostForm = async (event) => {
 document
     .querySelector('#submit-blog')
     .addEventListener('click', newPostForm)
+
+
+
+    

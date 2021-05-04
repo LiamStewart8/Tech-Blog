@@ -58,7 +58,7 @@ router.get('/blog/:id', withAuth, async(req, res) => {
 
 router.post('/blog', async (req, res) => {
     try {
-        const newComment = req.params.body;
+        const newComment = req.body;
         newComment.user_id = req.session.user_id;
         const commentData = await Comment.create(newComment);
         res.status(200).json(commentData);

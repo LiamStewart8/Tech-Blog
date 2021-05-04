@@ -6,10 +6,13 @@
         <p class="panel-text">{{blog.body}}</p>
     </div>
 </div>
+
+<br>
+
 {{#each comment}}
-<div class="panel" style="width: 36rem;" id="comment-form">
+<div class="panel panel-primary" style="width: 36rem;" id="comment-form">
     <div class="panel-body">
-        <h5>{{User.username}} on {{time}}</h5>
+        <h5>Posted by {{User.username}} -- {{time}}</h5>
         <p class="panel-text">{{body}}</p>
     </div>
 </div>
@@ -20,10 +23,10 @@
     <div class="form-group" style="width: 80rem;" >
         <label for="exampleFormControlTextarea1">Comment</label>
         <textarea class="form-control" rows="3" id="comment-form"></textarea>
-        <input type="hidden" id="postId" value="{{blog.id}}">
+        <input type="hidden" id="postId" name="postId" value="{{blog.id}}">
     </div>
     <button type="button" class="btn btn-dark" id="submit-comment">Send</button>
     </form>
 </div>
 
-<script src="comment.js"></script>
+<script src="/comment.js"></script>
