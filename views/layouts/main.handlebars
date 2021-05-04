@@ -19,16 +19,19 @@
             </div>
             <ul class="nav navbar-nav">
                 <li class="active"><a href="">Home</a></li>
+                {{#if logged_in}}
                 <li><a href="/dashboard">Dashboard</a></li>
             </ul>
+            
             <ul class="nav navbar-nav navbar-right">
                 <li><a href=""><span class="glyphicon glyphicon-user" id="logout"></span>Logout</a></li>
             </ul>
+            {{else}}
+            {{/if}}
         </div>
     </nav>  
 
-    
-
+    {{#unless logged_in}}
     <aside class="col-md-1">
     <div class="card">
     <article class="card-body">
@@ -55,6 +58,7 @@
     </article>
     </div> 
     </aside> 
+    {{/unless}}
 
 
     <main class="container container-fluid mt-5">
@@ -63,8 +67,9 @@
 
 
     {{#if logged_in}}
-    <script src="../../public/logout.js"></script>
+    <script src="logout.js"></script>
     {{/if}}
+    <script src="login.js"></script>
 </body>
 
 </html>

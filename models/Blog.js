@@ -26,6 +26,10 @@ Blog.init(
                 key: 'id',
             },
         },
+        time: {
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW,
+        },
     },
     {
         sequelize,

@@ -1,0 +1,15 @@
+<div class="card" style="width: 36rem;">
+    <div class="card-body">
+        <h5><a href="/blog/{{blog.id}}" class="card-title">{{blog.title}}</a></h5>
+        <h6 class="card-subtitle mb-2 text-muted">{{blog.User.name}}</h6>
+        <p class="card-text">{{blog.body}}</p>
+    </div>
+</div>
+{{#each comment}}
+<div class="card" style="width: 36rem;">
+    <div class="card-body">
+        <h5>{{User.username}} on {{time}}</h5>
+        <p class="card-text">{{body}}</p>
+    </div>
+</div>
+{{/each}}
